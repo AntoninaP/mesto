@@ -5,3 +5,30 @@
     justify-content: space-between;
     align-items: center;
 }
+
+@media screen and (max-width: 1180px) {
+    .profile {
+        width: calc(100% - 2*150px);
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .profile {
+        width: calc(100% - 2*100px);
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .profile {
+        width: calc(100% - 2*60px);
+    }
+}
+
+@media screen and (max-width: 630px) {
+    .profile {
+        width: calc(100% - 2*19px);
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+}

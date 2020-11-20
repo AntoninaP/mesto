@@ -5,3 +5,9 @@
     justify-content: center;
     flex-grow: 2;
 }
+
+@media screen and (max-width: 630px) {
+    .profile__info {
+        align-items: center;
+    }
+}
