@@ -9,64 +9,78 @@
   <title>Mesto</title>
 </head>
 <body class="root">
-  <header class="header root__header">
-    <img src="images/vector.png" alt="логотип сайта" class="header__logo">
-  </header>
-  <section class="profile">
-    <img src="images/avatar.jpg" alt="аватар пользователя" class="profile__avatar">
-    <div class="profile__info">
-      <div class="profile__name-pencil-group">
-        <h1 class="profile__name">Жак-Ив Кусто</h1>
-        <img src="images/pencil.png" alt="изображение карандаша" class="profile__pencil">
-      </div>
-      <p class="profile__profession">Исследователь океана</p>
+<header class="header root__header">
+  <img src="images/vector.png" alt="логотип сайта" class="header__logo">
+</header>
+<section class="profile">
+  <img src="images/avatar.jpg" alt="аватар пользователя" class="profile__avatar">
+  <div class="profile__info">
+    <div class="profile__name-pencil-group">
+      <h1 class="profile__name">Жак-Ив Кусто</h1>
+      <img src="images/pencil.png" alt="изображение карандаша" class="profile__pencil">
     </div>
-    <img src="images/plus.png" alt="изображение крестика" class="profile__add-button">
-  </section>
-  <section class="elements root__elements">
-    <div class="elements__item">
-      <img src="images/kamchatka.jpg" alt="пейзаж Камчатки" class="elements__image">
-      <div class="elements__name">
-        <p class="elements__title">Камчатка</p>
-        <img src="images/heart.png" alt="иконка в виде сердца" class="elements__like">
-      </div>
+    <p class="profile__profession">Исследователь океана</p>
+  </div>
+  <img src="images/plus.png" alt="изображение крестика" class="profile__add-button">
+</section>
+<section class="elements root__elements">
+  <div class="elements__item">
+    <img src="images/kamchatka.jpg" alt="пейзаж Камчатки" class="elements__image">
+    <div class="elements__name">
+      <p class="elements__title">Камчатка</p>
+      <img src="images/heart.png" alt="иконка в виде сердца" class="elements__like">
     </div>
-    <div class="elements__item">
-      <img src="images/karachaevsk.jpg" alt="Карачаевск" class="elements__image">
-      <div class="elements__name">
-        <p class="elements__title">Карачаевск</p>
-        <img src="images/heart.png" alt="иконка в виде сердца" class="elements__like">
-      </div>
+  </div>
+  <div class="elements__item">
+    <img src="images/karachaevsk.jpg" alt="Карачаевск" class="elements__image">
+    <div class="elements__name">
+      <p class="elements__title">Карачаевск</p>
+      <img src="images/heart.png" alt="иконка в виде сердца" class="elements__like">
     </div>
-    <div class="elements__item">
-      <img src="images/ruskeala.jpg" alt="парк Рускеала" class="elements__image">
-      <div class="elements__name">
-        <p class="elements__title">Карелия парк Рускеала</p>
-        <img src="images/heart.png" alt="иконка в виде сердца" class="elements__like">
-      </div>
+  </div>
+  <div class="elements__item">
+    <img src="images/ruskeala.jpg" alt="парк Рускеала" class="elements__image">
+    <div class="elements__name">
+      <p class="elements__title">Карелия парк Рускеала</p>
+      <img src="images/heart.png" alt="иконка в виде сердца" class="elements__like">
     </div>
-    <div class="elements__item">
-      <img src="images/elbrus.png" alt="гора Эльбрус" class="elements__image">
-      <div class="elements__name">
-        <p class="elements__title">Эльбрус</p>
-        <img src="images/heart.png" alt="иконка в виде сердца" class="elements__like">
-      </div>
+  </div>
+  <div class="elements__item">
+    <img src="images/elbrus.png" alt="гора Эльбрус" class="elements__image">
+    <div class="elements__name">
+      <p class="elements__title">Эльбрус</p>
+      <img src="images/heart.png" alt="иконка в виде сердца" class="elements__like">
     </div>
-    <div class="elements__item">
-      <img src="images/fiolent.jpg" alt="мыс Фиолент" class="elements__image">
-      <div class="elements__name">
-        <p class="elements__title">мыс Фиолент</p>
-        <img src="images/heart.png" alt="иконка в виде сердца" class="elements__like">
-      </div>
+  </div>
+  <div class="elements__item">
+    <img src="images/fiolent.jpg" alt="мыс Фиолент" class="elements__image">
+    <div class="elements__name">
+      <p class="elements__title">мыс Фиолент</p>
+      <img src="images/heart.png" alt="иконка в виде сердца" class="elements__like">
     </div>
-    <div class="elements__item">
-      <img src="images/dombai.png" alt="Домбай" class="elements__image">
-      <div class="elements__name">
-        <p class="elements__title">Домбай</p>
-        <img src="images/heart.png" alt="иконка в виде сердца" class="elements__like">
-      </div>
+  </div>
+  <div class="elements__item">
+    <img src="images/dombai.png" alt="Домбай" class="elements__image">
+    <div class="elements__name">
+      <p class="elements__title">Домбай</p>
+      <img src="images/heart.png" alt="иконка в виде сердца" class="elements__like">
     </div>
-  </section>
+  </div>
+</section>
+<section class="popap">
+  <div class="popup__container">
+    <img src="images/Close%20Icon.png" alt="иконка закрытия окна" class="popap__close-ico">
+    <form method="post" action="form.php" class="popap__form">
+      <p class="popap__title">Редактировать профиль</p>
+      <label for="name"></label>
+      <input type="text" name="name" required class="popap__input" placeholder="Жак-Ив Кусто">
+      <label for="profession"></label>
+      <input type="text" name="profession" required class="popap__input" placeholder="Исследователь океана">
+      <button type="submit" class="popap__button">Сохранить</button>
+    </form>
+  </div>
+</section>
+<script src="script.js"></script>
 </body>
 <footer class="footer">
   <p class="footer__text">@2020 Антонина Полякова</p>

@@ -1,0 +1,15 @@
+.popap__input {
+    width: 358px;
+    height: 27px;
+    margin: 30px 0 0 36px;
+    padding: 0;
+    border: none;
+    border-bottom: 1px solid rgba(84, 84, 84, 0.2);
+}
+
+@media screen and (max-width: 320px) {
+    .popap__input {
+        width: 238px;
+        margin: 30px 0 0 22px;
+    }
+}

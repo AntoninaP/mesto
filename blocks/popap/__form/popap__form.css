@@ -1,0 +1,19 @@
+.popap__form {
+    background: #FFFFFF;
+    box-shadow: 0px 0px 25px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    width: 430px;
+    height: 330px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+@media screen and (max-width: 320px) {
+    .popap__form {
+        width: 282px;
+        height: 322px;
+    }
+}

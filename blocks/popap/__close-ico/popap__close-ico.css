@@ -1,0 +1,11 @@
+.popap__close-ico {
+    width: 40px;
+    align-self: flex-end;
+}
+
+
+@media screen and (max-width: 320px) {
+    .popap__close-ico {
+        width: 26px;
+    }
+}
