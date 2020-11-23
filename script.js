@@ -3,15 +3,15 @@ let openButton = document.querySelector('.profile__pencil');
 openButton.addEventListener('click', showPopap);
 
 function showPopap() {
-  let popap = document.querySelector('.popap');
+  let popap = document.querySelector('.popup');
   popap.classList.add('popap_opened');
 }
 
-let closeButton = document.querySelector('.popap__close-ico');
+let closeButton = document.querySelector('.popup__close-ico');
 closeButton.addEventListener('click', hidePopap)
 
 function hidePopap() {
-  let popap = document.querySelector('.popap');
+  let popap = document.querySelector('.popup');
   popap.classList.remove('popap_opened');
 }
 
@@ -24,14 +24,14 @@ function putLike() {
 }
 
 // изменение данных профиля
-let formElement = document.querySelector('.popap__form');
+let formElement = document.querySelector('.popup__form');
 
 function formSubmitHandler(evt) {
   evt.preventDefault();
 
 
-  let nameInput = document.querySelector('.popap__input-name');
-  let jobInput = document.querySelector('.popap__input-job');
+  let nameInput = document.querySelector('.popup__input-name');
+  let jobInput = document.querySelector('.popup__input-job');
 
 
   let newName = document.querySelector('.profile__name');

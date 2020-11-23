@@ -1,4 +1,4 @@
-.popap__form {
+.popup__form {
     background: #FFFFFF;
     box-shadow: 0 0 25px rgba(0, 0, 0, 0.15);
     border-radius: 10px;
@@ -9,7 +9,7 @@
 }
 
 @media screen and (max-width: 320px) {
-    .popap__form {
+    .popup__form {
         max-width: 282px;
     }
 }
