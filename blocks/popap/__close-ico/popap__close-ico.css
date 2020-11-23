@@ -3,6 +3,10 @@
     align-self: flex-end;
 }
 
+.popap__close-ico:hover {
+    opacity: 60%;
+    cursor: pointer;
+}
 
 @media screen and (max-width: 320px) {
     .popap__close-ico {

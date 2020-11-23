@@ -2,14 +2,18 @@
     padding: 7px;
     border: 1px solid #FFFFFF;
     max-width: 10px;
-    margin: 0 0 16px 18px;
+    margin: 15px 0 0 0;
     }
 
+.profile__pencil:hover {
+    cursor: pointer;
+    opacity: 60%;
+}
 
 @media screen and (max-width: 320px) {
     .profile__pencil {
         padding: 4.25px;
         max-width: 7.5px;
-        margin: 0 0 9px 10px;
+        margin: 0;
     }
 }
