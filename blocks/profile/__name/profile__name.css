@@ -1,10 +1,11 @@
 .profile__name {
+    max-width: 294px;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
     color: #FFFFFF;
     font-size: 42px;
-    line-height: calc(48/42);
+    line-height: calc(48 / 42);
     font-weight: 500;
     font-style: normal;
     margin: 0;
@@ -18,10 +19,16 @@
     }
 }
 
+@media screen and (max-width: 630px) {
+    .profile__name {
+        justify-self: end;
+    }
+}
+
 @media screen and (max-width: 320px) {
     .profile__name {
         font-size: 27px;
-        line-height: calc(32.68/27);
-        justify-self: center;
+        line-height: calc(32.68 / 27);
+        justify-self: end;
     }
 }

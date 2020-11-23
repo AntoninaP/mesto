@@ -39,5 +39,6 @@ function formSubmitHandler(evt) {
   newName.textContent = nameInput.value;
   newJob.textContent = jobInput.value;
 }
+
 formElement.addEventListener('submit', formSubmitHandler);
 
