@@ -1,0 +1,15 @@
+.elements__button-like {
+    border: none;
+    margin-right: 4px;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
+    padding: 0;
+
+}
+
+.elements__button-like:hover {
+    opacity: 50%;
+    cursor: pointer;
+    transition: opacity linear 2s;
+}

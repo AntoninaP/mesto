@@ -3,15 +3,13 @@
     grid-template-rows: repeat(2, auto);
     grid-template-columns: repeat(2, auto);
     gap: 16px 18px;
-    max-width: 336px;
+    max-width: 340px;
     flex-grow: 2;
 
 }
 
 @media screen and (max-width: 320px) {
     .profile__info {
-        grid-template-rows: repeat(2, auto);
-        grid-template-columns: repeat(2, auto);
         gap: 10px 14px;
         width: calc(100% - 2 * 19px);
     }

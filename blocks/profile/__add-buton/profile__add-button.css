@@ -2,22 +2,29 @@
     border: 2px solid #FFFFFF;
     padding: 12px 62px 12px 62px;
     justify-self: flex-end;
+    border-radius: 2px;
+    font: inherit;
+    color: inherit;
+    background-color: transparent;
 }
 
 .profile__add-button:hover {
     opacity: 60%;
     cursor: pointer;
+    transition: opacity linear 2s;
 }
 
 @media screen and (max-width: 820px) {
     .profile__add-button {
-        padding: 12px 50px 12px 50px;
+        padding-right: 50px;
+        padding-left: 50px;
     }
 }
 
 @media screen and (max-width: 700px) {
     .profile__add-button {
-        padding: 12px 30px 12px 30px;
+        padding-right: 30px;
+        padding-left: 30px;
     }
 }
 
