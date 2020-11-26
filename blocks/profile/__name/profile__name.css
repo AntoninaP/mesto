@@ -21,7 +21,8 @@
 
 @media screen and (max-width: 630px) {
     .profile__name {
-        justify-self: end;
+        justify-self: center;
+        max-width: 200px;
     }
 }
 
@@ -29,6 +30,6 @@
     .profile__name {
         font-size: 27px;
         line-height: calc(32.68 / 27);
-        justify-self: end;
+        max-width: 212px;
     }
 }

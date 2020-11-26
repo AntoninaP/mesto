@@ -5,7 +5,11 @@
     font: inherit;
     color: inherit;
     background-color: transparent;
-    padding: 0;
+    padding: 20px 0 20px 0;
+    background-image: url("../../../images/close-icon.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 }
 
 .popup__close-button:hover {

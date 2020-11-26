@@ -17,10 +17,20 @@
     transition: opacity linear 2s;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 600px) {
+    .popup__button {
+        max-width: 306px;
+        margin: 45px 22px 25px 22px;
+        padding-right: 87px;
+        padding-bottom: 14px;
+        padding-left: 87px;
+    }
+}
+
+@media screen and (max-width: 420px) {
     .popup__button {
         max-width: 238px;
-        margin: 45px 22px 25px 22px;
-        padding: 14px 92px 14px 72px;
+        padding-right: 92px;
+        padding-left: 72px;
     }
 }

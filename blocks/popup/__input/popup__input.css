@@ -4,18 +4,24 @@
     padding: 0 0 13px 0;
     border: none;
     border-bottom: 1px solid rgba(84, 84, 84, 0.2);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
     font-size: 14px;
     line-height: calc(17 / 14);
     font-weight: normal;
     font-style: normal;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 600px) {
+    .popup__input {
+        width: 306px;
+        margin-right: 22px;
+        margin-left: 22px;
+    }
+}
+
+@media screen and (max-width: 420px) {
     .popup__input {
         width: 238px;
-        margin: 30px 22px 0 22px;
+        margin-right: 22px;
+        margin-left: 22px;
     }
 }

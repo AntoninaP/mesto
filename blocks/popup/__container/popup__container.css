@@ -12,7 +12,13 @@
     max-width: 500px;
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 600px) {
+    .popup__container {
+        max-width: 350px;
+    }
+}
+
+@media screen and (max-width: 420px) {
     .popup__container {
         max-width: 282px;
     }

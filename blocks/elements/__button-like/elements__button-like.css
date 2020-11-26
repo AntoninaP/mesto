@@ -4,7 +4,11 @@
     font: inherit;
     color: inherit;
     background-color: transparent;
-    padding: 0;
+    padding: 9px 11px 9px 11px;
+    background-image: url("../../../images/heart.svg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
 
 }
 
