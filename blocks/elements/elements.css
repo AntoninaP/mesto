@@ -23,11 +23,6 @@
         grid-template-columns: repeat(2, 1fr);
         grid-template-rows: repeat(3, 1fr);
         gap: 20px;
-    }
-}
-
-@media screen and (max-width: 820px) {
-    .elements {
         width: calc(100% - 2 * 60px);
     }
 }
