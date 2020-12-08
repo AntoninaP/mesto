@@ -8,7 +8,6 @@
     cursor: pointer;
 }
 
-
 @media screen and (max-width: 1180px) {
     .elements__image {
         height: 23.72vw;
