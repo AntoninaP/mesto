@@ -46,23 +46,21 @@ function showPopup(elem) {
   elem.classList.add('popup_opened');
 }
 
+function hidePopup(elem) {
+  elem.classList.remove('popup_opened');
+}
+
 function fillPopupUserData() {
   showPopup(popupUserData);
   nameInput.value = name.textContent;
   jobInput.value = job.textContent;
 }
 
-function hidePopup() {
-  popupUserData.classList.remove('popup_opened');
-  popupPlace.classList.remove('popup_opened');
-  popupPreview.classList.remove('popup_opened');
-}
-
-function formSubmitHandler(evt) {
+function handleFormSubmit(evt) {
   evt.preventDefault();
   name.textContent = nameInput.value;
   job.textContent = jobInput.value;
-  hidePopup();
+  hidePopup(popupUserData);
 }
 
 // создание галереи карточек
@@ -89,13 +87,13 @@ function composeItem(item) {
 // добавление новой карточки
 function fillPopupPlace(evt) {
   evt.preventDefault();
-  let newItem = {
+  const newItem = {
     name: placeInput.value,
     link: imageInput.value
-  }
+  };
   const newCard = composeItem(newItem);
   containerElements.prepend(newCard);
-  hidePopup();
+  hidePopup(popupPlace);
 }
 
 //удаление карточки
@@ -114,22 +112,26 @@ function giveLike(event) {
 
 //попап увеличения изображения
 function previewImage(event) {
-  showPopup(popupPreview);
   const targetElement = event.target;
   const targetBox = targetElement.closest('.elements__item');
   const targetImage = targetBox.querySelector('.elements__image');
   const targetTitle = targetBox.querySelector('.elements__title');
   const previewImage = popupPreview.querySelector('.popup__image');
-  const previewTitle = popupPreview.querySelector('.popup__preview-title')
+  const previewTitle = popupPreview.querySelector('.popup__preview-title');
   previewImage.src = targetImage.src;
   previewTitle.textContent = targetTitle.textContent;
+  showPopup(popupPreview);
 }
 
 openButton.addEventListener('click', fillPopupUserData);
 closeButtons.forEach((closeButton) => {
-  closeButton.addEventListener('click', hidePopup);
+  closeButton.addEventListener('click', function (event){
+      const targetElement = event.target;
+      const targetBox = targetElement.closest('.popup');
+      hidePopup(targetBox);
+    });
 });
-formUserData.addEventListener('submit', formSubmitHandler);
+formUserData.addEventListener('submit', handleFormSubmit);
 addButton.addEventListener('click', () => showPopup(popupPlace));
 formPlace.addEventListener('submit', fillPopupPlace);
 

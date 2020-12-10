@@ -6,6 +6,8 @@
 
 .elements__image:hover {
     cursor: pointer;
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
 }
 
 @media screen and (max-width: 1180px) {
