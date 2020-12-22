@@ -44,10 +44,12 @@ const initialCards = [
 
 function showPopup(elem) {
   elem.classList.add('popup_opened');
+  addEscListener(elem);
 }
 
 function hidePopup(elem) {
   elem.classList.remove('popup_opened');
+  removeEscListener(elem);
 }
 
 function fillPopupUserData() {
@@ -125,14 +127,29 @@ function previewImage(event) {
 
 openButton.addEventListener('click', fillPopupUserData);
 closeButtons.forEach((closeButton) => {
-  closeButton.addEventListener('click', function (event){
-      const targetElement = event.target;
-      const targetBox = targetElement.closest('.popup');
-      hidePopup(targetBox);
-    });
+  closeButton.addEventListener('click', function (event) {
+    const targetElement = event.target;
+    const targetBox = targetElement.closest('.popup');
+    hidePopup(targetBox);
+  });
 });
 formUserData.addEventListener('submit', handleFormSubmit);
 addButton.addEventListener('click', () => showPopup(popupPlace));
 formPlace.addEventListener('submit', fillPopupPlace);
+
+function hidePopupByEsc(elem, event) {
+  const key = event.key;
+  if (key === 'Escape') {
+    hidePopup(elem);
+  }
+}
+
+function addEscListener(elem) {
+  document.addEventListener('keydown', (event) => hidePopupByEsc(elem, event));
+}
+
+function removeEscListener(elem) {
+  document.removeEventListener('keydown',(event) => hidePopupByEsc(elem, event));
+}
 
 renderList();
