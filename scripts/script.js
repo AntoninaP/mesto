@@ -14,6 +14,7 @@ const name = document.querySelector('.profile__name');
 const job = document.querySelector('.profile__profession');
 const containerElements = document.querySelector('.elements');
 const templateElement = document.querySelector('.template');
+const popupOverlays = document.querySelectorAll('.popup');
 
 const initialCards = [
   {
@@ -137,6 +138,7 @@ formUserData.addEventListener('submit', handleFormSubmit);
 addButton.addEventListener('click', () => showPopup(popupPlace));
 formPlace.addEventListener('submit', fillPopupPlace);
 
+// закрытие попапа кликом на esc
 function hidePopupByEsc(elem, event) {
   const key = event.key;
   if (key === 'Escape') {
@@ -149,7 +151,16 @@ function addEscListener(elem) {
 }
 
 function removeEscListener(elem) {
-  document.removeEventListener('keydown',(event) => hidePopupByEsc(elem, event));
+  document.removeEventListener('keydown', (event) => hidePopupByEsc(elem, event));
 }
+
+// закрытие попапа кликом на оверлей
+
+popupOverlays.forEach((popupOverlay) => {
+  popupOverlay.addEventListener('click', (event) => {
+    const targetElement = event.target;
+    hidePopup(targetElement);
+  });
+});
 
 renderList();

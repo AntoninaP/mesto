@@ -1,4 +1,3 @@
-
 function showError(form, input, config) {
   const error = form.querySelector(`.${input.id}-error`);
   error.textContent = input.validationMessage;
