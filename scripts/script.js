@@ -15,6 +15,8 @@ const job = document.querySelector('.profile__profession');
 const containerElements = document.querySelector('.elements');
 const templateElement = document.querySelector('.template');
 const popupOverlays = document.querySelectorAll('.popup');
+const previewImagePicture = popupPreview.querySelector('.popup__image');
+const previewTitle = popupPreview.querySelector('.popup__preview-title');
 
 const initialCards = [
   {
@@ -45,12 +47,12 @@ const initialCards = [
 
 function showPopup(elem) {
   elem.classList.add('popup_opened');
-  addEscListener(elem);
+  document.addEventListener('keydown', closeByEscape);
 }
 
 function hidePopup(elem) {
   elem.classList.remove('popup_opened');
-  removeEscListener(elem);
+  document.removeEventListener('keydown', closeByEscape);
 }
 
 function fillPopupUserData() {
@@ -76,13 +78,16 @@ function renderList() {
 function composeItem(item) {
   const elementItem = templateElement.content.cloneNode(true);
   const elementsImage = elementItem.querySelector('.elements__image');
-  elementsImage.addEventListener('click', previewImage);
+  elementsImage.addEventListener('click', () => {
+    previewImage(item)
+  });
   const elementsTitle = elementItem.querySelector('.elements__title');
   const deliteItem = elementItem.querySelector('.elements__button-delite');
   deliteItem.addEventListener('click', removeItem);
   const likeItem = elementItem.querySelector('.elements__button-like');
   likeItem.addEventListener('click', giveLike);
   elementsImage.src = item.link;
+  elementsImage.alt = item.name;
   elementsTitle.textContent = item.name;
   return elementItem;
 }
@@ -108,21 +113,13 @@ function removeItem(event) {
 
 //добавлениe и удаление лайка
 function giveLike(event) {
-  const targetElement = event.target;
-  const targetButton = targetElement.closest('.elements__button-like');
-  targetButton.classList.toggle('elements__button-like_black');
+  event.target.classList.toggle('elements__button-like_black');
 }
 
 //попап увеличения изображения
-function previewImage(event) {
-  const targetElement = event.target;
-  const targetBox = targetElement.closest('.elements__item');
-  const targetImage = targetBox.querySelector('.elements__image');
-  const targetTitle = targetBox.querySelector('.elements__title');
-  const previewImage = popupPreview.querySelector('.popup__image');
-  const previewTitle = popupPreview.querySelector('.popup__preview-title');
-  previewImage.src = targetImage.src;
-  previewTitle.textContent = targetTitle.textContent;
+function previewImage(item) {
+  previewImagePicture.src = item.link;
+  previewTitle.textContent = item.name;
   showPopup(popupPreview);
 }
 
@@ -135,23 +132,19 @@ closeButtons.forEach((closeButton) => {
   });
 });
 formUserData.addEventListener('submit', handleFormSubmit);
-addButton.addEventListener('click', () => showPopup(popupPlace));
+addButton.addEventListener('click', () => {
+  formPlace.reset();
+  showPopup(popupPlace)
+});
 formPlace.addEventListener('submit', fillPopupPlace);
 
 // закрытие попапа кликом на esc
-function hidePopupByEsc(elem, event) {
-  const key = event.key;
-  if (key === 'Escape') {
-    hidePopup(elem);
+
+function closeByEscape(evt) {
+  if (evt.key === 'Escape') {
+    const openedPopup = document.querySelector('.popup_opened')
+    hidePopup(openedPopup);
   }
-}
-
-function addEscListener(elem) {
-  document.addEventListener('keydown', (event) => hidePopupByEsc(elem, event));
-}
-
-function removeEscListener(elem) {
-  document.removeEventListener('keydown', (event) => hidePopupByEsc(elem, event));
 }
 
 // закрытие попапа кликом на оверлей
