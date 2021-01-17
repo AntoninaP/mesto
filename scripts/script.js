@@ -47,6 +47,15 @@ const initialCards = [
   }
 ];
 
+const validationConfig = {
+  formSelector: '.popup__form',
+  inputSelector: '.popup__input',
+  submitButtonSelector: '.popup__button',
+  inactiveButtonClass: 'popup__button_submit_inactive',
+  inputErrorClass: 'popup__input_type_error',
+  errorClass: 'popup__input-error_active'
+};
+
 //создание карточек из всех элементов массива и публикация в DOM
 initialCards.forEach((data) => {
   const card = new Card(data);
@@ -136,4 +145,10 @@ popupOverlays.forEach((popupOverlay) => {
   });
 });
 
+// валидация форм
+const forms = document.querySelectorAll(validationConfig.formSelector);
+forms.forEach(form => {
+  const validator = new FormValidator(validationConfig, form);
+  validator.enableValidation();
+});
 
