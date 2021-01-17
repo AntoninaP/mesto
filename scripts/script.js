@@ -1,4 +1,5 @@
 import {Card} from './card.js';
+import {FormValidator} from './validate.js';
 
 const popupUserData = document.querySelector('.popup-user');
 const popupPlace = document.querySelector('.popup-place');
@@ -15,7 +16,6 @@ const imageInput = document.querySelector('.popup__input-image');
 const name = document.querySelector('.profile__name');
 const job = document.querySelector('.profile__profession');
 const containerElements = document.querySelector('.elements');
-// const templateElement = document.querySelector('.template');
 const popupOverlays = document.querySelectorAll('.popup');
 const previewImagePicture = popupPreview.querySelector('.popup__image');
 const previewTitle = popupPreview.querySelector('.popup__preview-title');
@@ -52,7 +52,19 @@ initialCards.forEach((data) => {
   const card = new Card(data);
   const cardElement = card.generate();
   containerElements.append(cardElement);
+  previewImage(cardElement);
 });
+
+// попап превью изображения
+function previewImage(cardElement) {
+  const title = cardElement.querySelector('.elements__title');
+  const image = cardElement.querySelector('.elements__image');
+  image.addEventListener('click', () => {
+    previewImagePicture.src = image.src;
+    previewTitle.textContent = title.textContent;
+    showPopup(popupPreview);
+  })
+}
 
 // добавление новой карточки
 function fillPopupPlace(evt) {
@@ -62,10 +74,13 @@ function fillPopupPlace(evt) {
     link: imageInput.value
   };
   const card = new Card(newItem);
-  const newCard = card.generate();
-  containerElements.prepend(newCard);
+  const cardElement = card.generate();
+  containerElements.prepend(cardElement);
+  previewImage(cardElement);
+
   hidePopup(popupPlace);
 }
+
 
 function showPopup(elem) {
   elem.classList.add('popup_opened');
@@ -90,53 +105,6 @@ function handleFormSubmit(evt) {
   hidePopup(popupUserData);
 }
 
-
-// создание галереи карточек
-// function renderList() {
-//   const itemsList = initialCards.map(composeItem);
-//   containerElements.append(...itemsList);
-// }
-
-// создание карточки из template
-// function composeItem(item) {
-// const elementItem = templateElement.content.cloneNode(true);
-const elementsImage = elementItem.querySelector('.elements__image');
-elementsImage.addEventListener('click', () => {
-  previewImage(item)
-// });
-// const elementsTitle = elementItem.querySelector('.elements__title');
-// const deliteItem = elementItem.querySelector('.elements__button-delite');
-// deliteItem.addEventListener('click', removeItem);
-// const likeItem = elementItem.querySelector('.elements__button-like');
-// likeItem.addEventListener('click', giveLike);
-// elementsImage.src = item.link;
-// elementsImage.alt = item.name;
-// elementsTitle.textContent = item.name;
-// return elementItem;
-// }
-
-  //попап увеличения изображения
-  function previewImage(item) {
-    previewImagePicture.src = item.link;
-    previewTitle.textContent = item.name;
-    showPopup(popupPreview);
-  }
-
-
-// //удаление карточки
-// function removeItem(event) {
-//   const targetElement = event.target;
-//   const targetItem = targetElement.closest('.elements__item');
-//   targetItem.remove();
-// }
-
-// //добавлениe и удаление лайка
-// function giveLike(event) {
-//   event.target.classList.toggle('elements__button-like_black');
-// }
-
-
-
 openButton.addEventListener('click', fillPopupUserData);
 closeButtons.forEach((closeButton) => {
   closeButton.addEventListener('click', function (event) {
@@ -153,7 +121,6 @@ addButton.addEventListener('click', () => {
 formPlace.addEventListener('submit', fillPopupPlace);
 
 // закрытие попапа кликом на esc
-
 function closeByEscape(evt) {
   if (evt.key === 'Escape') {
     const openedPopup = document.querySelector('.popup_opened')
@@ -162,7 +129,6 @@ function closeByEscape(evt) {
 }
 
 // закрытие попапа кликом на оверлей
-
 popupOverlays.forEach((popupOverlay) => {
   popupOverlay.addEventListener('click', (event) => {
     const targetElement = event.target;
@@ -170,4 +136,4 @@ popupOverlays.forEach((popupOverlay) => {
   });
 });
 
-renderList();
+
