@@ -3,6 +3,9 @@ export class FormValidator {
   constructor(config, form) {
     this._config = config;
     this._form = form;
+
+    this._inputList = this._form.querySelectorAll(this._config.inputSelector);
+    this._button = this._form.querySelector(this._config.submitButtonSelector);
   }
 
   enableValidation() {
@@ -36,7 +39,7 @@ export class FormValidator {
   }
 
   _setButtonState() {
-    const button = this._form.querySelector(this._config.submitButtonSelector);
+    const button = this._button;
     const isActive = this._form.checkValidity();
     if (isActive) {
       button.classList.remove(this._config.inactiveButtonClass);
@@ -48,12 +51,18 @@ export class FormValidator {
   }
 
   _setEventListener() {
-    const inputList = this._form.querySelectorAll(this._config.inputSelector);
-    inputList.forEach(input => {
-      input.addEventListener('input', (event) => {
+    this._inputList.forEach(input => {
+      input.addEventListener('input', () => {
         this._checkInputValidity(input);
         this._setButtonState();
       });
     });
+  }
+
+  resetValidation() {
+    this._inputList.forEach(input => {
+      this._hideError(input);
+    });
+    this._setButtonState();
   }
 }

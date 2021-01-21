@@ -1,5 +1,5 @@
-import {Card} from './card.js';
-import {FormValidator} from './validate.js';
+import {Card} from './Card.js';
+import {FormValidator} from './FormValidator.js';
 
 const popupUserData = document.querySelector('.popup-user');
 const popupPlace = document.querySelector('.popup-place');
@@ -56,23 +56,22 @@ const validationConfig = {
   errorClass: 'popup__input-error_active'
 };
 
+function createCard(data) {
+  const card = new Card(data, '.template_type_default', handleCardClick);
+  const cardElement = card.generate();
+  return cardElement;
+}
+
 //создание карточек из всех элементов массива и публикация в DOM
 initialCards.forEach((data) => {
-  const card = new Card(data);
-  const cardElement = card.generate();
-  containerElements.append(cardElement);
-  previewImage(cardElement);
+  containerElements.append(createCard(data));
 });
 
 // попап превью изображения
-function previewImage(cardElement) {
-  const title = cardElement.querySelector('.elements__title');
-  const image = cardElement.querySelector('.elements__image');
-  image.addEventListener('click', () => {
-    previewImagePicture.src = image.src;
-    previewTitle.textContent = title.textContent;
-    showPopup(popupPreview);
-  })
+function handleCardClick(image, title) {
+  previewImagePicture.src = image;
+  previewTitle.textContent = title;
+  showPopup(popupPreview);
 }
 
 // добавление новой карточки
@@ -82,11 +81,7 @@ function fillPopupPlace(evt) {
     name: placeInput.value,
     link: imageInput.value
   };
-  const card = new Card(newItem);
-  const cardElement = card.generate();
-  containerElements.prepend(cardElement);
-  previewImage(cardElement);
-
+  containerElements.prepend(createCard(newItem));
   hidePopup(popupPlace);
 }
 
@@ -94,6 +89,7 @@ function fillPopupPlace(evt) {
 function showPopup(elem) {
   elem.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEscape);
+  resetValidators();
 }
 
 function hidePopup(elem) {
@@ -145,10 +141,19 @@ popupOverlays.forEach((popupOverlay) => {
   });
 });
 
+const validators = [];
+
+function resetValidators() {
+  validators.forEach(validator => {
+    validator.resetValidation();
+  });
+}
+
 // валидация форм
 const forms = document.querySelectorAll(validationConfig.formSelector);
 forms.forEach(form => {
   const validator = new FormValidator(validationConfig, form);
   validator.enableValidation();
+  validators.push(validator);
 });
 
