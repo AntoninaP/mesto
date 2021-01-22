@@ -89,7 +89,6 @@ function fillPopupPlace(evt) {
 function showPopup(elem) {
   elem.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEscape);
-  resetValidators();
 }
 
 function hidePopup(elem) {
@@ -98,9 +97,10 @@ function hidePopup(elem) {
 }
 
 function fillPopupUserData() {
-  showPopup(popupUserData);
   nameInput.value = name.textContent;
   jobInput.value = job.textContent;
+  resetValidators();
+  showPopup(popupUserData);
 }
 
 function handleFormSubmit(evt) {
@@ -121,6 +121,7 @@ closeButtons.forEach((closeButton) => {
 formUserData.addEventListener('submit', handleFormSubmit);
 addButton.addEventListener('click', () => {
   formPlace.reset();
+  resetValidators();
   showPopup(popupPlace)
 });
 formPlace.addEventListener('submit', fillPopupPlace);
