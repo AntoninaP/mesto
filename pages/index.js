@@ -1,5 +1,8 @@
-import {Card} from './Card.js';
-import {FormValidator} from './FormValidator.js';
+import {Card} from '../components/Card.js';
+import {FormValidator} from '../components/FormValidator.js';
+import {Section} from '../components/Section.js';
+import {initialCards, containerElements} from '../utils/constants.js';
+
 
 const popupUserData = document.querySelector('.popup-user');
 const popupPlace = document.querySelector('.popup-place');
@@ -15,37 +18,11 @@ const placeInput = document.querySelector('.popup__input-place-title');
 const imageInput = document.querySelector('.popup__input-image');
 const name = document.querySelector('.profile__name');
 const job = document.querySelector('.profile__profession');
-const containerElements = document.querySelector('.elements');
+
 const popupOverlays = document.querySelectorAll('.popup');
 const previewImagePicture = popupPreview.querySelector('.popup__image');
 const previewTitle = popupPreview.querySelector('.popup__preview-title');
 
-const initialCards = [
-  {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
-  },
-  {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
-  },
-  {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
-  },
-  {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
-  },
-  {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
-  },
-  {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
-  }
-];
 
 const validationConfig = {
   formSelector: '.popup__form',
@@ -56,16 +33,30 @@ const validationConfig = {
   errorClass: 'popup__input-error_active'
 };
 
-function createCard(data) {
-  const card = new Card(data, '.template_type_default', handleCardClick);
-  const cardElement = card.generate();
-  return cardElement;
-}
+//создание карточек через класс Section
+const cardList = new Section(
+  {
+    items: initialCards,
+    renderer: (cardItem) => {
+      const card = new Card(cardItem, '.template_type_default', handleCardClick);
+      const cardElement = card.generate();
+      cardList.addItems(cardElement);
+    }
+  },
+  containerElements);
+cardList.renderItems();
 
-//создание карточек из всех элементов массива и публикация в DOM
-initialCards.forEach((data) => {
-  containerElements.append(createCard(data));
-});
+//перенесено в Section
+// function createCard(data) {
+//   const card = new Card(data, '.template_type_default', handleCardClick);
+//   const cardElement = card.generate();
+//   return cardElement;
+// }
+//
+// //создание карточек из всех элементов массива и публикация в DOM
+// initialCards.forEach((data) => {
+//   containerElements.append(createCard(data));
+// });
 
 // попап превью изображения
 function handleCardClick(image, title) {
