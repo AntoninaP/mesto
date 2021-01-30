@@ -26,3 +26,8 @@ export const initialCards = [
 ];
 
 export const containerElements = '.elements';
+export const popupOverlays = document.querySelectorAll('.popup');
+export const closeButtons = document.querySelectorAll('.popup__close-button');
+export const popupPreview = document.querySelector('.popup-preview');
+export const previewImagePicture = popupPreview.querySelector('.popup__image');
+export const previewTitle = popupPreview.querySelector('.popup__preview-title');
