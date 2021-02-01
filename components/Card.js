@@ -1,4 +1,3 @@
-import {PopupWithImage} from "./PopupWithImage.js";
 
 export class Card {
 

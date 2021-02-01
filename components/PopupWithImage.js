@@ -1,5 +1,5 @@
 import {Popup} from './Popup.js';
-import {popupPreview, previewImagePicture, previewTitle} from '../utils/constants.js';
+import {previewImagePicture, previewTitle} from '../utils/constants.js';
 
 export class PopupWithImage extends Popup {
   constructor(popup) {

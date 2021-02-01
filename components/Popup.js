@@ -6,7 +6,6 @@ export class Popup {
     this.open = this.open.bind(this);
     this.close = this.close.bind(this);
     this._handleEscClose = this._handleEscClose.bind(this);
-    this._setEventListeners();
   }
   open () {
     this._popup.classList.add('popup_opened');
@@ -15,7 +14,7 @@ export class Popup {
 
   close () {
     this._popup.classList.remove('popup_opened');
-    document.addEventListener('keydown', this._handleEscClose);
+    //toDo найти как удалять обработчик закрытия по ескейпу
   }
 
   // закрытие попапа кликом на esc
@@ -25,7 +24,7 @@ export class Popup {
     }
   }
 
-  _setEventListeners () {
+  setEventListeners () {
       this._closeButton.addEventListener('click', this.close);
   }
 }
