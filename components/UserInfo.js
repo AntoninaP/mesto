@@ -1,17 +1,17 @@
-import {jobInput, nameInput, userJob, userName} from "../utils/constants.js";
 
 export class UserInfo {
-  constructor(name, job) {
-    this._name = userName.value;
-    this._job = userJob.value
+  constructor({name, job}) {
+    this._name = name;
+    this._job = job;
   }
 
   getUserInfo () {
-
+    return {name: this._name.textContent, job: this._job.textContent};
   }
 
-  setUserInfo () {
-
+  setUserInfo (name, job) {
+    this._name.textContent = name;
+    this._job.textContent = job;
   }
 }
 

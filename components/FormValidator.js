@@ -1,8 +1,9 @@
+import {popupForm} from "../utils/constants.js";
 
 export class FormValidator {
-  constructor(config, form) {
+  constructor(config, popup) {
     this._config = config;
-    this._form = form;
+    this._form = popup.querySelector(popupForm);
 
     this._inputList = this._form.querySelectorAll(this._config.inputSelector);
     this._button = this._form.querySelector(this._config.submitButtonSelector);
@@ -39,14 +40,13 @@ export class FormValidator {
   }
 
   _setButtonState() {
-    const button = this._button;
     const isActive = this._form.checkValidity();
     if (isActive) {
-      button.classList.remove(this._config.inactiveButtonClass);
-      button.disabled = false;
+      this._button.classList.remove(this._config.inactiveButtonClass);
+      this._button.disabled = false;
     } else {
-      button.classList.add(this._config.inactiveButtonClass);
-      button.disabled = true;
+      this._button.classList.add(this._config.inactiveButtonClass);
+      this._button.disabled = true;
     }
   }
 
@@ -57,12 +57,5 @@ export class FormValidator {
         this._setButtonState();
       });
     });
-  }
-
-  resetValidation() {
-    this._inputList.forEach(input => {
-      this._hideError(input);
-    });
-    this._setButtonState();
   }
 }
