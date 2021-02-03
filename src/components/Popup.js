@@ -27,8 +27,13 @@ export class Popup {
   }
 
   setEventListeners () {
-      this._closeButton.addEventListener('click', this.close);
-      // this._popupOverlay.addEventListener('click', this.close);
+    this._closeButton.addEventListener('click', this.close);
+    // закрытие попапа кликом на оверлей
+    this._popupOverlay.addEventListener('click', (event) => {
+      if (event.target.classList.contains('popup')) {
+      this.close();
+      }
+    })
   }
 }
 
