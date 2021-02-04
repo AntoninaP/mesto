@@ -5,16 +5,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="проектная работа №4 Антонины Поляковой на Яндекс.Практикуме">
   <meta name="author" content="Antonina Polyakova">
-  <link rel="stylesheet" href="pages/index.css">
   <title>Mesto</title>
 </head>
 <body class="root">
 <header class="header root__header">
-  <img src="images/logo.svg" alt="логотип сайта" class="header__logo">
+  <img src="<%=require('./images/logo.svg')%>" alt="логотип сайта" class="header__logo">
 </header>
 <main class="content">
   <section class="profile">
-    <img src="images/avatar.jpg" alt="аватар пользователя" class="profile__avatar">
+    <img src="<%=require('./images/avatar.jpg')%>" alt="аватар пользователя" class="profile__avatar">
     <div class="profile__info">
       <h1 class="profile__name">Жак-Ив Кусто</h1>
       <button type="button" class="profile__edit-button"></button>
@@ -25,7 +24,7 @@
   <section class="elements root__elements">
     <template class="template template_type_default">
       <div class="elements__item">
-        <img src="images/kamchatka.jpg" class="elements__image" alt="место в России">
+        <img src="<%=require('./images/kamchatka.jpg')%>" class="elements__image" alt="место в России">
         <button type="button" class="elements__button-delite"></button>
         <div class="elements__name">
           <h2 class="elements__title">Камчатка</h2>
@@ -84,7 +83,7 @@
 <div class="popup popup_dark popup-preview">
   <div class="popup__container-preview">
     <button type="button" class="popup__close-button"></button>
-    <img src="images/kamchatka.jpg" alt="изображение достопримечательности в России" class="popup__image">
+    <img src="<%=require('./images/kamchatka.jpg')%>" alt="изображение достопримечательности в России" class="popup__image">
     <p class="popup__preview-title">изображение достопримечательности в России</p>
   </div>
 </div>
