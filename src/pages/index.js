@@ -11,11 +11,11 @@ import {
   popupPreview,
   popupPlace,
   addButton,
-  popupUserData, openButton, userName, userJob, validationConfig,
+  popupUserData, openButton, userName, userJob, validationConfig, previewImagePicture, previewTitle
 } from '../utils/constants.js';
 
 // Попап увеличения изображения. экземпляр класса PopupWithImage
-const popupWithImage = new PopupWithImage(popupPreview);
+const popupWithImage = new PopupWithImage(popupPreview, previewImagePicture, previewTitle);
 popupWithImage.setEventListeners();
 
 function renderCard(cardItem) {
@@ -56,11 +56,13 @@ openButton.addEventListener('click', () => {
     name: data.name,
     profession: data.job
   });
+  validatorUserForm.resetValidation();
   popupUserInfo.open();
 });
 
 //кнопка добавления новой карточки
 addButton.addEventListener('click', () => {
+  validatorPlaceForm.resetValidation();
   popupAddNewCard.open();
 });
 
