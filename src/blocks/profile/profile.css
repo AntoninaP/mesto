@@ -5,6 +5,7 @@
     grid-template-rows: 100%;
     gap: 0 3.4%;
     align-items: center;
+    position: relative;
 }
 
 @media screen and (max-width: 1180px) {
