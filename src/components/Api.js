@@ -57,16 +57,31 @@ export class Api {
         name: name,
         link: link
       })
+    })
         .then((res) => {
-          if (res.ok) {
+          if (res.ok){
             return res.json();
           }
           return Promise.reject('сервер не доступен')
         })
-    })
   }
 
-
+// редактирование аватара
+  addNewAvatar(avatar) {
+    return fetch(this.baseUrl + 'users/me/avatar', {
+      method: 'PATCH',
+      headers: this.headers,
+      body: JSON.stringify({
+        avatar: avatar,
+      })
+    })
+      .then((res) => {
+        if (res.ok){
+          return res.json();
+        }
+        return Promise.reject('сервер не доступен')
+      })
+  }
 
   // другие методы работы с API
 }

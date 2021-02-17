@@ -5,13 +5,14 @@ import {PopupWithForm} from "../components/PopupWithForm.js";
 import {Card} from "../components/Card.js";
 import {FormValidator} from '../components/FormValidator.js';
 import {Section} from '../components/Section.js';
+import {Avatar} from '../components/Avatar.js';
 import {
-  // initialCards,
   containerElements,
   popupPreview,
   popupPlace,
   addButton,
-  popupUserData, openButton, userName, userJob, validationConfig, previewImagePicture, previewTitle
+  popupUserData, openButton, userName, userJob, validationConfig, previewImagePicture, previewTitle,
+  avatarButton, popupAvatar, imgAvatar
 } from '../utils/constants.js';
 import {Api} from "../components/Api.js";
 
@@ -54,10 +55,19 @@ api
 
 // добавление новой карточки. экземпляр класса PopupWithForm
 const popupAddNewCard = new PopupWithForm(popupPlace, (formValues) => {
-  renderCard({
-    name: formValues['place-title'],
-    link: formValues.image
-  });
+  console.log(formValues)
+  api
+    .addNewCard(formValues['place-title'], formValues.image)
+    .then((data) => {
+      console.log(data)
+      renderCard({
+        name: data.name,
+        link: data.link
+      });
+    })
+    .catch((err) => {
+      console.log('error', err)
+    })
 });
 popupAddNewCard.setEventListeners();
 
@@ -68,12 +78,13 @@ addButton.addEventListener('click', () => {
 });
 
 // ПРОФИЛЬ
-
 // подставляем изначальные данные пользователя с сервера
 api
   .getProfileInfo()
   .then((data) => {
+    console.log(data)
     userInfo.setUserInfo(data.name, data.about);
+    avatar.editAvatar(data.avatar)
   })
   .catch((err) => {
     console.log('error', err)
@@ -103,6 +114,25 @@ openButton.addEventListener('click', () => {
   popupUserInfo.open();
 });
 
+//изменение аватара
+const avatar = new Avatar(imgAvatar);
+const avatarPopup = new PopupWithForm(popupAvatar, (formValues) => {
+  console.log(formValues)
+  api
+    .addNewAvatar(formValues.image)
+    .then((data) => {
+      avatar.editAvatar(data.avatar);
+    })
+    .catch((err) => {
+      console.log('error', err)
+    })
+})
+avatarPopup.setEventListeners();
+
+avatarButton.addEventListener('click', () => {
+  validatorUserForm.resetValidation();
+  avatarPopup.open();
+});
 
 //валидация форм
 const validatorPlaceForm = new FormValidator(validationConfig, popupPlace);
