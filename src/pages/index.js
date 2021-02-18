@@ -178,7 +178,6 @@ const avatarPopup = new PopupWithForm(popupAvatar, (formValues) => {
 avatarPopup.setEventListeners();
 
 avatarButton.addEventListener('click', () => {
-  validatorUserForm.resetValidation();
   avatarPopup.open();
 });
 
@@ -188,6 +187,8 @@ validatorPlaceForm.enableValidation();
 
 const validatorUserForm = new FormValidator(validationConfig, popupUserData);
 validatorUserForm.enableValidation();
+
+
 
 
 

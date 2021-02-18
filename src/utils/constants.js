@@ -10,11 +10,10 @@ export const popupPlace = document.querySelector('.popup-place');
 export const addButton = document.querySelector('.profile__add-button');
 export const popupUserData = document.querySelector('.popup-user');
 export const openButton = document.querySelector('.profile__edit-button');
-export const avatarButton = document.querySelector('.profile__avatar_edit');
+export const avatarButton = document.querySelector('.profile__avatar-edit');
 export const popupAvatar = document.querySelector('.popup-avatar');
 export const imgAvatar = document.querySelector('.profile__avatar');
-export const submitButtonText = document.querySelector('.popup__button');
-export const popupDeleteCard = document.querySelector('.popup__delete-card');
+export const popupDeleteCard = document.querySelector('.popup-delete-card');
 
 export const validationConfig = {
   formSelector: '.popup__form',
