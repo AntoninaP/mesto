@@ -1,4 +1,4 @@
-.profile__avatar_edit {
+.profile__avatar-edit {
     font: inherit;
     background-color: rgba(0, 0, 0, 0.8);
     background-image: url("../../../../images/pencil-big.svg");
@@ -15,14 +15,14 @@
     padding: 0;
 }
 
-.profile__avatar_edit:hover {
+.profile__avatar-edit:hover {
     opacity: 1;
     cursor: pointer;
     transition: opacity 0.5s linear;
 }
 
 @media screen and (max-width: 630px) {
-    .profile__avatar_edit {
+    .profile__avatar-edit {
         left: calc(50% - 60px);
     }
 }
