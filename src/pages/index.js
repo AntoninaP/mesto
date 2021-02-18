@@ -6,12 +6,9 @@ import {Card} from "../components/Card.js";
 import {FormValidator} from '../components/FormValidator.js';
 import {Section} from '../components/Section.js';
 import {
-  containerElements,
-  popupPreview,
-  popupPlace,
-  addButton,
-  popupUserData, openButton, userName, userJob, validationConfig, previewImagePicture, previewTitle,
-  avatarButton, popupAvatar, imgAvatar, submitButtonText, popupDeleteCard
+  containerElements, popupPreview, popupPlace, addButton, popupUserData,
+  openButton, userName, userJob, validationConfig, previewImagePicture, previewTitle,
+  avatarButton, popupAvatar, imgAvatar, popupDeleteCard
 } from '../utils/constants.js';
 import {Api} from "../components/Api.js";
 import {PopupWithSubmit} from "../components/PopupWithSubmit";
@@ -29,28 +26,59 @@ const api = new Api({
 const popupWithImage = new PopupWithImage(popupPreview, previewImagePicture, previewTitle);
 popupWithImage.setEventListeners();
 
+// попап подтверждения удаления карточки
+const popupCardDelete = new PopupWithSubmit(popupDeleteCard);
+popupCardDelete.setEventListeners();
+
 // КАРТОЧКИ
 let cardList
+
 function renderCard(cardItem) {
-  const card = new Card(cardItem, '.template_type_default', popupWithImage.open);
-  const cardElement = card.generate();
+  const card = new Card(
+    {
+      cardItem: cardItem,
+      //превью изображения
+      handleCardClick: () => {
+        popupWithImage.open(cardItem.link, cardItem.name);
+      },
+      //поставить-удалить лайк
+      handleLikeClick: (giveLike, id, deleteLike) => {
+        api
+          .putLike(id)
+          .then((data) => {
+            giveLike(data.likes)
+          })
+          .catch((err) => {
+            console.log('error', err)
+          });
+        api
+          .deleteLike(id)
+          .then((data) => {
+            deleteLike(data.likes)
+          })
+          .catch((err) => {
+            console.log('error', err)
+          });
+      },
+      // удаление карточки
+      handleDeleteIconClick: (removeCard, id) => {
+        popupCardDelete.setAction(() => {
+          api
+            .deleteCard(id)
+            .then(() => {
+              removeCard();
+            })
+            .catch((err) => {
+              console.log('error', err)
+            });
+        })
+        popupCardDelete.open();
+      },
+    },
+    '.template_type_default');
+  const cardElement = card.generate(userInfo.getUserId());
   cardList.addItems(cardElement);
 }
-
-// {
-//   data: {
-//   ...данные карточки (включая информацию по лайкам)
-//   },
-//   handleCardClick: () => {
-//   ...что должно произойти при клике на картинку
-//   },
-//     handleLikeClick: (card) => {
-// ...что должно произойти при клике на лайк
-// },
-//   handleDeleteIconClick: (card) => {
-// ...что должно произойти при клике на удаление
-// },
-
 
 // добавление массива карточек с сервера
 api
@@ -74,11 +102,7 @@ const popupAddNewCard = new PopupWithForm(popupPlace, (formValues) => {
   api
     .addNewCard(formValues['place-title'], formValues.image)
     .then((data) => {
-      console.log(data)
-      renderCard({
-        name: data.name,
-        link: data.link
-      });
+      renderCard(data);
     })
     .catch((err) => {
       console.log('error', err)
@@ -95,10 +119,6 @@ addButton.addEventListener('click', () => {
   popupAddNewCard.open();
 });
 
-// удаление карточки
-// const popupDeleteCard = new PopupWithSubmit(popupDeleteCard);
-
-
 // ПРОФИЛЬ
 // подставляем изначальные данные пользователя с сервера
 api
@@ -106,6 +126,7 @@ api
   .then((data) => {
     console.log(data)
     userInfo.setUserInfo(data.name, data.about);
+    userInfo.setUserId(data._id);
     imgAvatar.src = data.avatar;
   })
   .catch((err) => {
@@ -122,7 +143,7 @@ const popupUserInfo = new PopupWithForm(popupUserData, (formValues) => {
       console.log('error', err)
     })
     .finally(() => {
-    popupUserInfo.close();
+      popupUserInfo.close();
     })
 });
 popupUserInfo.setEventListeners();
@@ -140,7 +161,6 @@ openButton.addEventListener('click', () => {
 });
 
 //изменение аватара
-
 const avatarPopup = new PopupWithForm(popupAvatar, (formValues) => {
   console.log(formValues)
   api

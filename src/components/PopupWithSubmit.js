@@ -6,7 +6,6 @@ export class PopupWithSubmit extends Popup {
     this._element = popup.querySelector('.popup__form');
   }
 
-
   setEventListeners() {
     super.setEventListeners()
     // отмена стандартного поведения

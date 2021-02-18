@@ -84,30 +84,25 @@ export class Api {
   }
 
   // удаление карточки
-  deleteCard(id) {
-    return fetch(this.baseUrl + 'cards/cardId', {
+  deleteCard(cardId) {
+    return fetch(this.baseUrl + `cards/likes/${cardId}`, {
       method: 'DELETE',
       headers: this.headers,
-      body: JSON.stringify({
-        _id: id,
-      })
     })
       .then((res) => {
         if (res.ok){
           return res.json();
         }
+        console.log(res.json())
         return Promise.reject('сервер не доступен')
       })
   }
 
   //поставить лайк
-  putLike() {
-    return fetch(this.baseUrl + 'cards/likes/cardId', {
+  putLike(cardId) {
+    return fetch(this.baseUrl + `cards/likes/${cardId}`, {
       method: 'PUT',
       headers: this.headers,
-      body: JSON.stringify({
-
-      })
     })
       .then((res) => {
         if (res.ok){
@@ -118,13 +113,10 @@ export class Api {
   }
 
   //удалить лайк
-  deleteLike() {
-    return fetch(this.baseUrl + 'cards/likes/cardId', {
+  deleteLike(cardId) {
+    return fetch(this.baseUrl + `cards/likes/${cardId}`, {
       method: 'DELETE',
       headers: this.headers,
-      body: JSON.stringify({
-
-      })
     })
       .then((res) => {
         if (res.ok){
@@ -133,8 +125,6 @@ export class Api {
         return Promise.reject('сервер не доступен')
       })
   }
-
-
 }
 
 
