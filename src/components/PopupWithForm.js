@@ -7,6 +7,7 @@ export class PopupWithForm extends Popup {
     this._submitCb = submitCb;
     this._inputList = this._popup.querySelectorAll('.popup__input');
     this._formValues = {};
+    this._originalButtonText = this._element.querySelector('.popup__button').textContent;
   }
 
   //собираем данных всех полей формы и записываем в объект
@@ -31,12 +32,22 @@ export class PopupWithForm extends Popup {
       (evt).preventDefault();
       this._getInputValues();
       this._submitCb(this._formValues);
-      this.close();
+      this._renderLoading(true);
     })
+  }
+
+  // изменение текста кнопки при загрузке
+  _renderLoading(isLoad) {
+    if (isLoad) {
+      this._element.querySelector('.popup__button').textContent = 'Cохрaнение...'
+    } else {
+      this._element.querySelector('.popup__button').textContent = this._originalButtonText;
+    }
   }
 
   close() {
     super.close();
+    this._renderLoading(false);
     this._element.reset();
   }
 }

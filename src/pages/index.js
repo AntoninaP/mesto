@@ -5,16 +5,16 @@ import {PopupWithForm} from "../components/PopupWithForm.js";
 import {Card} from "../components/Card.js";
 import {FormValidator} from '../components/FormValidator.js';
 import {Section} from '../components/Section.js';
-import {Avatar} from '../components/Avatar.js';
 import {
   containerElements,
   popupPreview,
   popupPlace,
   addButton,
   popupUserData, openButton, userName, userJob, validationConfig, previewImagePicture, previewTitle,
-  avatarButton, popupAvatar, imgAvatar
+  avatarButton, popupAvatar, imgAvatar, submitButtonText, popupDeleteCard
 } from '../utils/constants.js';
 import {Api} from "../components/Api.js";
+import {PopupWithSubmit} from "../components/PopupWithSubmit";
 
 // запросы на сервер. задаем исходные параметры
 const api = new Api({
@@ -36,6 +36,21 @@ function renderCard(cardItem) {
   const cardElement = card.generate();
   cardList.addItems(cardElement);
 }
+
+// {
+//   data: {
+//   ...данные карточки (включая информацию по лайкам)
+//   },
+//   handleCardClick: () => {
+//   ...что должно произойти при клике на картинку
+//   },
+//     handleLikeClick: (card) => {
+// ...что должно произойти при клике на лайк
+// },
+//   handleDeleteIconClick: (card) => {
+// ...что должно произойти при клике на удаление
+// },
+
 
 // добавление массива карточек с сервера
 api
@@ -68,6 +83,9 @@ const popupAddNewCard = new PopupWithForm(popupPlace, (formValues) => {
     .catch((err) => {
       console.log('error', err)
     })
+    .finally(() => {
+      popupAddNewCard.close();
+    })
 });
 popupAddNewCard.setEventListeners();
 
@@ -77,6 +95,10 @@ addButton.addEventListener('click', () => {
   popupAddNewCard.open();
 });
 
+// удаление карточки
+// const popupDeleteCard = new PopupWithSubmit(popupDeleteCard);
+
+
 // ПРОФИЛЬ
 // подставляем изначальные данные пользователя с сервера
 api
@@ -84,7 +106,7 @@ api
   .then((data) => {
     console.log(data)
     userInfo.setUserInfo(data.name, data.about);
-    avatar.editAvatar(data.avatar)
+    imgAvatar.src = data.avatar;
   })
   .catch((err) => {
     console.log('error', err)
@@ -98,7 +120,10 @@ const popupUserInfo = new PopupWithForm(popupUserData, (formValues) => {
     .editProfileInfo(formValues.name, formValues.profession)
     .catch((err) => {
       console.log('error', err)
-    });
+    })
+    .finally(() => {
+    popupUserInfo.close();
+    })
 });
 popupUserInfo.setEventListeners();
 
@@ -115,16 +140,19 @@ openButton.addEventListener('click', () => {
 });
 
 //изменение аватара
-const avatar = new Avatar(imgAvatar);
+
 const avatarPopup = new PopupWithForm(popupAvatar, (formValues) => {
   console.log(formValues)
   api
     .addNewAvatar(formValues.image)
     .then((data) => {
-      avatar.editAvatar(data.avatar);
+      imgAvatar.src = data.avatar
     })
     .catch((err) => {
       console.log('error', err)
+    })
+    .finally(() => {
+      avatarPopup.close();
     })
 })
 avatarPopup.setEventListeners();
