@@ -14,7 +14,7 @@ export class Card {
     this._giveLike = this._giveLike.bind(this);
     this._deleteLike = this._deleteLike.bind(this);
     this._removeItem = this._removeItem.bind(this);
-
+    this._likeIsExists = false;
   }
 
 // метод для возврата разметки
@@ -40,7 +40,7 @@ export class Card {
     this._cardImage.src = this._link;
     this._cardImage.alt = this._name;
     this._cardName.textContent = this._name;
-    this._showLikeAmount();
+    this._showLikeAmount(id);
 
     return this._element;
   }
@@ -48,7 +48,8 @@ export class Card {
   // метод обработчик событий
   _setEventListeners() {
     this._buttonLike.addEventListener('click', () => {
-      this._handleLikeClick(this._giveLike, this._id, this._deleteLike);
+      this._handleLikeClick(this._giveLike, this._id, this._deleteLike, this._likeIsExists);
+      this._likeIsExists = !this._likeIsExists
     });
     this._buttonDelite.addEventListener('click', () => {
       this._handleDeleteIconClick(this._removeItem, this._id);
@@ -73,7 +74,13 @@ export class Card {
   }
 
   //показать количество лайков
-  _showLikeAmount() {
+  _showLikeAmount(id) {
+    this._likes.forEach((like) => {
+      if (like._id === id) {
+        this._buttonLike.classList.add('elements__button-like_black');
+        this._likeIsExists = true;
+      }
+    });
     this._element.querySelector('.elements__counter').textContent = this._likes.length;
   }
 

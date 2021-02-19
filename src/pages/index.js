@@ -42,23 +42,28 @@ function renderCard(cardItem) {
         popupWithImage.open(cardItem.link, cardItem.name);
       },
       //поставить-удалить лайк
-      handleLikeClick: (giveLike, id, deleteLike) => {
-        api
-          .putLike(id)
-          .then((data) => {
-            giveLike(data.likes)
-          })
-          .catch((err) => {
-            console.log('error', err)
-          });
-        api
-          .deleteLike(id)
-          .then((data) => {
-            deleteLike(data.likes)
-          })
-          .catch((err) => {
-            console.log('error', err)
-          });
+      handleLikeClick: (giveLike, id, deleteLike, likeIsExist) => {
+        if (likeIsExist) {
+          api
+            .deleteLike(id)
+            .then((data) => {
+              deleteLike(data.likes)
+            })
+            .catch((err) => {
+              console.log('error', err)
+            });
+        } else {
+          api
+            .putLike(id)
+            .then((data) => {
+              giveLike(data.likes)
+            })
+            .catch((err) => {
+              console.log('error', err)
+            });
+        }
+
+
       },
       // удаление карточки
       handleDeleteIconClick: (removeCard, id) => {
@@ -178,6 +183,7 @@ const avatarPopup = new PopupWithForm(popupAvatar, (formValues) => {
 avatarPopup.setEventListeners();
 
 avatarButton.addEventListener('click', () => {
+  validatorAvatarForm.resetValidation();
   avatarPopup.open();
 });
 
@@ -188,7 +194,8 @@ validatorPlaceForm.enableValidation();
 const validatorUserForm = new FormValidator(validationConfig, popupUserData);
 validatorUserForm.enableValidation();
 
-
+const validatorAvatarForm = new FormValidator(validationConfig, popupAvatar);
+validatorAvatarForm.enableValidation();
 
 
 
