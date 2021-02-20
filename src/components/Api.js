@@ -4,17 +4,19 @@ export class Api {
     this.headers = options.headers;
   }
 
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Ошибка ${res.status}`);
+  }
+
  // запрос данных пользователя с сервера
   getProfileInfo() {
     return fetch(this.baseUrl + 'users/me', {
       headers: this.headers
     })
-      .then((res) => {
-        if (res.ok){
-          return res.json();
-        }
-          return Promise.reject('сервер не доступен')
-      })
+      .then(this._checkResponse)
   }
 
   // редактирование данных пользователя
@@ -27,12 +29,7 @@ export class Api {
         about: about
       })
     })
-      .then((res) => {
-        if (res.ok){
-          return res.json();
-        }
-        return Promise.reject('сервер не доступен')
-      })
+      .then(this._checkResponse)
   }
 
   // загрузка массива карточек с сервера
@@ -40,12 +37,7 @@ export class Api {
     return fetch(this.baseUrl + 'cards', {
       headers: this.headers
     })
-      .then((res) => {
-        if (res.ok){
-          return res.json();
-        }
-        return Promise.reject('сервер не доступен')
-      })
+      .then(this._checkResponse)
   }
 
 // добавление новой карточки
@@ -58,12 +50,7 @@ export class Api {
         link: link
       })
     })
-        .then((res) => {
-          if (res.ok){
-            return res.json();
-          }
-          return Promise.reject('сервер не доступен')
-        })
+      .then(this._checkResponse)
   }
 
 // редактирование аватара
@@ -75,12 +62,7 @@ export class Api {
         avatar: avatar,
       })
     })
-      .then((res) => {
-        if (res.ok){
-          return res.json();
-        }
-        return Promise.reject('сервер не доступен')
-      })
+      .then(this._checkResponse)
   }
 
   // удаление карточки
@@ -89,12 +71,7 @@ export class Api {
       method: 'DELETE',
       headers: this.headers,
     })
-      .then((res) => {
-        if (res.ok){
-          return res.json();
-        }
-        return Promise.reject('сервер не доступен')
-      })
+      .then(this._checkResponse)
   }
 
   //поставить лайк
@@ -103,12 +80,7 @@ export class Api {
       method: 'PUT',
       headers: this.headers,
     })
-      .then((res) => {
-        if (res.ok){
-          return res.json();
-        }
-        return Promise.reject('сервер не доступен')
-      })
+      .then(this._checkResponse)
   }
 
   //удалить лайк
@@ -117,12 +89,7 @@ export class Api {
       method: 'DELETE',
       headers: this.headers,
     })
-      .then((res) => {
-        if (res.ok){
-          return res.json();
-        }
-        return Promise.reject('сервер не доступен')
-      })
+      .then(this._checkResponse)
   }
 }
 

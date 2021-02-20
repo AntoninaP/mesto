@@ -132,18 +132,20 @@ api
     console.log(data)
     userInfo.setUserInfo(data.name, data.about);
     userInfo.setUserId(data._id);
-    imgAvatar.src = data.avatar;
+    userInfo.setAvatar(data.avatar);
   })
   .catch((err) => {
     console.log('error', err)
   });
 
 // экземпляр класса UserInfo. редактирование данных профиля
-const userInfo = new UserInfo({name: userName, job: userJob});
+const userInfo = new UserInfo({name: userName, job: userJob, avatar: imgAvatar});
 const popupUserInfo = new PopupWithForm(popupUserData, (formValues) => {
-  userInfo.setUserInfo(formValues.name, formValues.profession);
   api
     .editProfileInfo(formValues.name, formValues.profession)
+    .then(()=> {
+      userInfo.setUserInfo(formValues.name, formValues.profession);
+    })
     .catch((err) => {
       console.log('error', err)
     })
@@ -171,7 +173,7 @@ const avatarPopup = new PopupWithForm(popupAvatar, (formValues) => {
   api
     .addNewAvatar(formValues.image)
     .then((data) => {
-      imgAvatar.src = data.avatar
+      userInfo.setAvatar(data.avatar);
     })
     .catch((err) => {
       console.log('error', err)

@@ -19,10 +19,4 @@ export class PopupWithSubmit extends Popup {
   setAction(action) {
       this._action = action;
   }
-
-  close() {
-    super.close();
-    this._element.reset();
-  }
-
 }
